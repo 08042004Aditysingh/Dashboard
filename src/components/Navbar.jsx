@@ -9,6 +9,8 @@ import { Tooltip, TooltipComponent } from "@syncfusion/ej2-react-popups";
 import avatar from "../data/avatar.jpg";
 import { Cart, Chat, Notification, UserProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
+import {useState} from 'react';
+
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -34,11 +36,12 @@ const Navbar = () => {
     setIsClicked,
     handleClick,
     screenSize,
-    setScreenSize, currentColor
+    setScreenSize, currentColor, profile, setProfile
   } = useStateContext();
   useEffect(() => {
     const handleResize = () => {setScreenSize(window.innerWidth);}
     window.addEventListener("resize", handleResize);
+
 
     handleResize();
 
@@ -52,7 +55,9 @@ const Navbar = () => {
     }else{
       setActiveMenu(true);
     }
-  },[screenSize])
+  },[screenSize]);
+
+
 
   return (
     <div className="flex justify-between p-2 md:mx-6 relative">
@@ -95,9 +100,7 @@ const Navbar = () => {
         <TooltipComponent content="profile" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => {
-              handleClick("userProfile");
-            }}
+            onClick={()=>{handleClick('userProfile')}}
           >
             <img src={avatar} className="rounded-full w-8 h-8" />
             <p>
@@ -109,10 +112,10 @@ const Navbar = () => {
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>
-        {isClicked.cart && <Cart />}
-        {isClicked.chat && <Chat />}
-        {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />}
+        {isClicked.cart && profile && <Cart />}
+        {isClicked.chat && profile && <Chat />}
+        {isClicked.notification && profile && <Notification />}
+        {isClicked.userProfile && profile && <UserProfile />}
       </div>
     </div>
   );

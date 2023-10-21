@@ -97,7 +97,7 @@ const Navbar = () => {
           }}
           icon={<RiNotification3Line />}
         />
-        <TooltipComponent content="profile" position="BottomCenter">
+        <TooltipComponent content="" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={()=>{handleClick('userProfile')}}
@@ -115,6 +115,7 @@ const Navbar = () => {
         {isClicked.cart && profile && <Cart />}
         {isClicked.chat && profile && <Chat />}
         {isClicked.notification && profile && <Notification />}
+        {isClicked.userProfile && profile && <UserProfile/>}
         
       </div>
     </div>
